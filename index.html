@@ -27,9 +27,16 @@
         color: #fff;
         font-family: "JetBrains Mono", monospace;
         display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem;
       }
 
       .teaser {
@@ -60,16 +67,60 @@
         }
       }
 
-      .sub {
-        margin-top: 1.25rem;
-        font-size: clamp(0.8rem, 2.2vw, 1rem);
-        font-weight: 400;
+      .reveal {
         opacity: 0;
         transition: opacity 0.8s ease;
       }
 
-      .sub.visible {
+      .reveal.visible {
         opacity: 1;
+      }
+
+      .cta {
+        margin-top: 2.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.65rem 1.6rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.95rem;
+        text-decoration: none;
+        color: #fff;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        background:
+          linear-gradient(#000, #000) padding-box,
+          var(--grad) border-box;
+        transition: color 0.25s ease, transform 0.25s ease;
+      }
+
+      .btn:hover {
+        background: var(--grad);
+        color: #000;
+        transform: scale(1.04);
+      }
+
+      .btn.instagram {
+        --grad: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+      }
+
+      .btn.github {
+        --grad: linear-gradient(135deg, #f0f6fc, #8b949e);
+      }
+
+      .btn.fpv {
+        --grad: linear-gradient(135deg, #38bdf8, #6366f1);
+      }
+
+      .sub {
+        margin-top: 1.75rem;
+        font-size: clamp(0.8rem, 2.2vw, 1rem);
+        font-weight: 400;
       }
 
       .sub a {
@@ -81,19 +132,37 @@
       .sub a:hover {
         color: #888;
       }
+
+      footer {
+        text-align: center;
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.35);
+        padding-top: 1.5rem;
+      }
     </style>
   </head>
   <body>
-    <main class="teaser">
-      <p id="type-line"></p>
-      <p class="sub">
-        <a href="https://notnt.carrd.co" target="_blank" rel="noopener">notnt.carrd.co</a>
-        is moving here and will soon be retired.
-      </p>
+    <main>
+      <div class="teaser">
+        <p id="type-line"></p>
+
+        <div class="cta reveal">
+          <a class="btn instagram" href="https://www.instagram.com/c_users_nt/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn github" href="https://github.com/SkorpioX22" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn fpv" href="https://novafpv.carrd.co" target="_blank" rel="noopener">FPV</a>
+        </div>
+
+        <p class="sub reveal">
+          <a href="https://notnt.carrd.co" target="_blank" rel="noopener">notnt.carrd.co</a>
+          is moving here and will soon be retired.
+        </p>
+      </div>
     </main>
 
+    <footer>site version 0.1</footer>
+
     <script>
-      const text = "the new notnt is coming.";
+      const text = "hi, I'm Dave.";
       const el = document.getElementById("type-line");
       let i = 0;
 
@@ -102,7 +171,7 @@
           el.textContent = text.slice(0, ++i);
           setTimeout(type, 70);
         } else {
-          document.querySelector(".sub").classList.add("visible");
+          document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible"));
         }
       }
 
