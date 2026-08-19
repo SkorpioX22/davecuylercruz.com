@@ -47,7 +47,7 @@
       #type-line {
         font-size: clamp(1.4rem, 4vw, 2.4rem);
         font-weight: 500;
-        line-height: 1.35;
+        line-height: 1.5;
       }
 
       #type-line::after {
@@ -144,7 +144,7 @@
   <body>
     <main>
       <div class="teaser">
-        <p id="type-line"></p>
+        <p id="type-line" dir="auto"></p>
 
         <div class="cta reveal">
           <a class="btn instagram" href="https://www.instagram.com/c_users_nt/" target="_blank" rel="noopener">Instagram</a>
@@ -159,23 +159,133 @@
       </div>
     </main>
 
-    <footer>site version 0.1</footer>
+    <footer>site version 0.2</footer>
 
     <script>
-      const text = "hi, I'm Dave.";
-      const el = document.getElementById("type-line");
-      let i = 0;
+      // "hi, I'm Dave." in ~60 major languages, shuffled and cycled forever.
+      const languages = [
+        "hi, I'm Dave.", // English
+        "hola, soy Dave.", // Spanish
+        "salut, je suis Dave.", // French
+        "hallo, ich bin Dave.", // German
+        "ciao, sono Dave.", // Italian
+        "olá, eu sou o Dave.", // Portuguese
+        "hallo, ik ben Dave.", // Dutch
+        "привет, я Дэйв.", // Russian
+        "привіт, я Дейв.", // Ukrainian
+        "cześć, jestem Dave.", // Polish
+        "ahoj, jsem Dave.", // Czech
+        "ahoj, som Dave.", // Slovak
+        "salut, sunt Dave.", // Romanian
+        "szia, Dave vagyok.", // Hungarian
+        "γεια, είμαι ο Ντέιβ.", // Greek
+        "merhaba, ben Dave.", // Turkish
+        "hej, jag är Dave.", // Swedish
+        "hei, jeg er Dave.", // Norwegian
+        "hej, jeg er Dave.", // Danish
+        "hei, olen Dave.", // Finnish
+        "halló, ég er Dave.", // Icelandic
+        "你好，我是戴夫。", // Mandarin
+        "你好，我係 Dave。", // Cantonese
+        "こんにちは、デイブです。", // Japanese
+        "안녕하세요, 저는 데이브예요.", // Korean
+        "xin chào, tôi là Dave.", // Vietnamese
+        "สวัสดีครับ ผมชื่อเดฟ", // Thai
+        "halo, saya Dave.", // Indonesian
+        "hai, saya Dave.", // Malay
+        "hi, ako si Dave.", // Filipino
+        "नमस्ते, मैं डेव हूँ।", // Hindi
+        "হাই, আমি ডেভ।", // Bengali
+        "ہائے، میں ڈیو ہوں۔", // Urdu
+        "ਹਾਇ, ਮੈਂ ਡੇਵ ਹਾਂ।", // Punjabi
+        "हाय, मी डेव्ह.", // Marathi
+        "હાય, હું ડેવ છું.", // Gujarati
+        "வணக்கம், நான் டேவ்.", // Tamil
+        "హాయ్, నేను డేవ్.", // Telugu
+        "ನಮಸ್ಕಾರ, ನಾನು ಡೇವ್.", // Kannada
+        "ഹായ്, ഞാൻ ഡേവ് ആണ്.", // Malayalam
+        "ආයුබෝවන්, මම ඩේව්.", // Sinhala
+        "नमस्ते, म डेभ हुँ।", // Nepali
+        "မင်္ဂလာပါ၊ ကျွန်တော် Dave ပါ။", // Burmese
+        "ជំរាបសួរ, ខ្ញុំឈ្មោះ Dave។", // Khmer
+        "ສະບາຍດີ, ຂ້ອຍຊື່ Dave.", // Lao
+        "مرحبًا، أنا ديف.", // Arabic
+        "שלום, אני דייב.", // Hebrew
+        "سلام، من دیو هستم.", // Persian
+        "habari, mimi ni Dave.", // Swahili
+        "sawubona, nginguDave.", // Zulu
+        "sannu, ni Dave ne.", // Hausa
+        "bawo, èmi ni Dave.", // Yoruba
+        "ሰላም፣ እኔ Dave ነኝ።", // Amharic
+        "salaam, waxaan ahay Dave.", // Somali
+        "hallo, ek is Dave.", // Afrikaans
+        "dia duit, is mise Dave.", // Irish
+        "helo, Dave ydw i.", // Welsh
+        "hola, sóc en Dave.", // Catalan
+        "kaixo, ni Dave naiz.", // Basque
+        "përshëndetje, unë jam Dave.", // Albanian
+        "здраво, ја сам Дејв.", // Serbian
+        "bok, ja sam Dave.", // Croatian
+        "živjo, sem Dave.", // Slovenian
+        "labas, aš Deivas.", // Lithuanian
+        "sveiki, es esmu Deivs.", // Latvian
+        "tere, ma olen Dave.", // Estonian
+        "გამარჯობა, მე დეივ ვარ.", // Georgian
+        "բարև, ես Դեյվն եմ.", // Armenian
+        "salam, mən Deyvəm.", // Azerbaijani
+        "сәлем, мен Дэйвпін.", // Kazakh
+        "salom, men Deyvman.", // Uzbek
+        "сайн уу, би Дэйв.", // Mongolian
+        "прывітанне, я Дэйв.", // Belarusian
+        "здравей, аз съм Дейв.", // Bulgarian
+        "здраво, јас сум Дејв.", // Macedonian
+        "zdravo, ja sam Dave.", // Bosnian
+      ];
 
-      function type() {
-        if (i < text.length) {
-          el.textContent = text.slice(0, ++i);
-          setTimeout(type, 70);
-        } else {
-          document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visible"));
+      const el = document.getElementById("type-line");
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+      async function type(text, speed = 70) {
+        for (let i = 0; i <= text.length; i++) {
+          el.textContent = text.slice(0, i);
+          await sleep(speed);
         }
       }
 
-      type();
+      async function erase(speed = 35) {
+        while (el.textContent.length > 0) {
+          el.textContent = el.textContent.slice(0, -1);
+          await sleep(speed);
+        }
+      }
+
+      // Fisher-Yates shuffle.
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      (async () => {
+        // Start with English, reveal the rest of the page once it's typed.
+        await type(languages[0]);
+        document.querySelectorAll(".reveal").forEach((n) => n.classList.add("visible"));
+        await sleep(1500);
+        await erase();
+
+        // Cycle through all languages (including English again) in random order.
+        const order = shuffle(languages.slice());
+        while (true) {
+          for (const text of order) {
+            await type(text);
+            await sleep(1500);
+            await erase();
+            await sleep(500);
+          }
+        }
+      })();
     </script>
   </body>
 </html>
