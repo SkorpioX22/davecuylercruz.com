@@ -3,68 +3,110 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nova Dev Hub | Home</title>
+    <title>notnt</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background: #000;
+        color: #fff;
+        font-family: "JetBrains Mono", monospace;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+
+      .teaser {
+        text-align: center;
+        max-width: 48rem;
+      }
+
+      #type-line {
+        font-size: clamp(1.4rem, 4vw, 2.4rem);
+        font-weight: 500;
+        line-height: 1.35;
+      }
+
+      #type-line::after {
+        content: "";
+        display: inline-block;
+        width: 0.6em;
+        height: 1em;
+        margin-left: 0.15em;
+        vertical-align: text-bottom;
+        background: #fff;
+        animation: blink 1s steps(1) infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .sub {
+        margin-top: 1.25rem;
+        font-size: clamp(0.8rem, 2.2vw, 1rem);
+        font-weight: 400;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+
+      .sub.visible {
+        opacity: 1;
+      }
+
+      .sub a {
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .sub a:hover {
+        color: #888;
+      }
+    </style>
   </head>
   <body>
-    <nav class="top-nav">
-      <div class="container nav-inner">
-        <a class="brand" href="index.html">DAVE<span>.SYS</span></a>
-        <ul class="nav-links">
-          <li><a class="active" href="index.html">Home</a></li>
-          <li><a href="about.html">About Me</a></li>
-          <li><a href="music.html">Music Lab</a></li>
-          <li><a href="photography.html">Photo Logs</a></li>
-          <li><a href="fpv.html">FPV Missions</a></li>
-          <li><a href="contact.html">Contact Me</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <header class="hero container reveal">
-      <p class="eyebrow">My creative corner</p>
-      <h1>Hey, I'm Dave Cuyler Cruz — I make music, shoot photos, and fly FPV.</h1>
-      <p class="subtitle">
-        I'm Dave (short for Dave Cuyler Cruz). I release music as <strong>C:/Users/NT</strong>, fly FPV as <strong>NovaFPV</strong>, and share photography under my own name around Singapore.
+    <main class="teaser">
+      <p id="type-line"></p>
+      <p class="sub">
+        <a href="https://notnt.carrd.co" target="_blank" rel="noopener">notnt.carrd.co</a>
+        is moving here and will soon be retired.
       </p>
-      <div class="cta-row">
-        <a class="btn primary" href="about.html">About Dave</a>
-        <a class="btn secondary" href="contact.html">Get in Touch</a>
-      </div>
-    </header>
-
-    <main class="container section">
-      <section class="grid-3">
-        <article class="card reveal">
-          <span class="pill">Web Page 1</span>
-          <h3>Music Lab</h3>
-          <p>I write, produce, and release tracks on Spotify as C:/Users/NT.</p>
-          <a href="music.html">Enter Music Lab →</a>
-        </article>
-        <article class="card reveal">
-          <span class="pill">Web Page 2</span>
-          <h3>Photo Logs</h3>
-          <p>I shoot street and travel moments across Singapore with a Nikon Z50II.</p>
-          <a href="photography.html">Open Photo Logs →</a>
-        </article>
-        <article class="card reveal">
-          <span class="pill">Web Page 3</span>
-          <h3>FPV Missions</h3>
-          <p>I fly a Meteor75 Pro TinyWhoop and practice smooth, technical lines.</p>
-          <a href="fpv.html">View FPV Missions →</a>
-        </article>
-      </section>
     </main>
 
-    <footer>
-      <div class="container footer-inner">© 2026 Dave Cuyler Cruz. Thanks for visiting.</div>
-    </footer>
-    <script src="script.js"></script>
+    <script>
+      const text = "the new notnt is coming.";
+      const el = document.getElementById("type-line");
+      let i = 0;
+
+      function type() {
+        if (i < text.length) {
+          el.textContent = text.slice(0, ++i);
+          setTimeout(type, 70);
+        } else {
+          document.querySelector(".sub").classList.add("visible");
+        }
+      }
+
+      type();
+    </script>
   </body>
 </html>
