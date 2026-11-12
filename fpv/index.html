@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fpv — notnt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background: #000;
+        color: #fff;
+        font-family: "JetBrains Mono", monospace;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 1rem;
+      }
+
+      .wrap {
+        max-width: 42rem;
+        width: 100%;
+      }
+
+      .hero {
+        text-align: center;
+      }
+
+      .head {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .head::after {
+        content: "";
+        display: inline-block;
+        width: 0.6em;
+        height: 1em;
+        margin-left: 0.15em;
+        vertical-align: text-bottom;
+        background: #fff;
+        animation: blink 1s steps(1) infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .motto {
+        margin-top: 0.75rem;
+        font-size: clamp(1rem, 2.6vw, 1.25rem);
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .motto b {
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .meta {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.35);
+      }
+
+      .cta {
+        margin-top: 1.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.65rem 1.6rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.95rem;
+        text-decoration: none;
+        color: #fff;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        background:
+          linear-gradient(#000, #000) padding-box,
+          var(--grad) border-box;
+        transition: color 0.25s ease, transform 0.25s ease;
+      }
+
+      .btn:hover {
+        background: var(--grad);
+        color: #000;
+        transform: scale(1.04);
+      }
+
+      .btn.instagram {
+        --grad: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+      }
+
+      .section-title {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: rgba(255, 255, 255, 0.35);
+        margin: 2.75rem 0 0.75rem;
+      }
+
+      .gear {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .gear a {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.85rem 1.1rem;
+        color: #fff;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition: background 0.2s ease;
+      }
+
+      .gear a:last-child {
+        border-bottom: none;
+      }
+
+      .gear a:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .g-name {
+        font-size: 0.95rem;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .g-desc {
+        flex: 1;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: right;
+      }
+
+      .tag {
+        font-size: 0.6rem;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 20px;
+        padding: 0.1rem 0.5rem;
+        color: rgba(255, 255, 255, 0.35);
+        white-space: nowrap;
+      }
+
+      .g-arrow {
+        color: rgba(255, 255, 255, 0.35);
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+
+      .gear a:hover .g-arrow {
+        color: #fff;
+        transform: translate(2px, -2px);
+      }
+
+      @media (max-width: 560px) {
+        .gear a {
+          flex-wrap: wrap;
+          row-gap: 0.25rem;
+        }
+        .g-desc {
+          flex-basis: 100%;
+          order: 3;
+          text-align: left;
+        }
+        .g-arrow {
+          margin-left: auto;
+        }
+      }
+
+      .thanks {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .brands {
+        display: block;
+        margin: 1rem auto 0;
+        max-width: 30rem;
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .disc {
+        margin-top: 2.25rem;
+        font-size: 0.72rem;
+        line-height: 1.7;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+      }
+
+      .sub {
+        margin-top: 1.75rem;
+        font-size: clamp(0.8rem, 2.2vw, 1rem);
+        text-align: center;
+        color: rgba(255, 255, 255, 0.55);
+      }
+
+      .sub a {
+        color: #fff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .sub a:hover {
+        color: #888;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.35);
+        padding-top: 1.5rem;
+      }
+
+      footer a {
+        color: rgba(255, 255, 255, 0.35);
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        color: #fff;
+      }
+
+      .topnav {
+        text-align: center;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.35);
+        padding-bottom: 1.25rem;
+      }
+      .topnav a {
+        color: rgba(255, 255, 255, 0.55);
+        text-decoration: none;
+        margin: 0 0.6rem;
+      }
+      .topnav a:hover {
+        color: #fff;
+      }
+      .topnav a.active {
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="topnav">
+      <a href="../">home</a><a href="../type/">type</a><a href="../old/">old</a><a href="./" class="active">fpv</a>
+    </nav>
+
+    <main>
+      <div class="wrap">
+        <div class="hero">
+          <p class="head">nova.fpv</p>
+          <p class="motto">I'll never stop ripping. <b>Neither should you.</b></p>
+          <p class="meta">last updated october 23, 2026</p>
+
+          <div class="cta">
+            <a class="btn instagram" href="https://www.instagram.com/nova.fpvee/" target="_blank" rel="noopener">@nova.fpvee</a>
+          </div>
+        </div>
+
+        <p class="section-title">get my gear</p>
+        <div class="gear">
+          <a href="https://betafpv.com/products/meteor75-pro-brushless-whoop-quadcopter?srsltid=AfmBOorcdrANrzinXl2WHl3QX8jiFcDTC2SwlMzVZOH6WVuSadCfzeSv&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+            <span class="g-name">meteor75 pro</span>
+            <span class="g-desc">betafpv &middot; brushless whoop quadcopter</span>
+            <span class="tag">affiliate</span>
+            <span class="g-arrow">&#8599;</span>
+          </a>
+          <a href="https://betafpv.com/products/air65-ii-brushless-whoop-quadcopter?srsltid=AYCX9vIGq1YO8hT1sl9OkrkuoLpAVUeh1cNyBK7x71jMkQ_evXUfezyM&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+            <span class="g-name">air65 ii racing</span>
+            <span class="g-desc">betafpv &middot; brushless whoop quadcopter</span>
+            <span class="tag">affiliate</span>
+            <span class="g-arrow">&#8599;</span>
+          </a>
+          <a href="https://www.skyzonefpv.com/collections/goggles/products/skyzone-cobra-x-v2-5-8ghz-48ch-steadyview-receiver-fpv-goggles-with-dvr" target="_blank" rel="noopener">
+            <span class="g-name">goggles</span>
+            <span class="g-desc">skyzone &middot; cobra x v2 &middot; 5.8ghz 48ch steadyview &middot; dvr</span>
+            <span class="g-arrow">&#8599;</span>
+          </a>
+          <a href="https://radiomasterrc.com/products/pocket-radio-controller-m2" target="_blank" rel="noopener">
+            <span class="g-name">controller</span>
+            <span class="g-desc">radiomaster &middot; pocket radio controller m2</span>
+            <span class="g-arrow">&#8599;</span>
+          </a>
+          <a href="https://betafpv.com/products/lava-ii-1s-battery?srsltid=AfmBOoqkAAnUP0O_Y0j9_e5HsWv-XOA1eJokiFqP23ps_zGtk1LMipHy&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+            <span class="g-name">batteries</span>
+            <span class="g-desc">betafpv &middot; lava ii 1s</span>
+            <span class="tag">affiliate</span>
+            <span class="g-arrow">&#8599;</span>
+          </a>
+        </div>
+
+        <p class="section-title">support</p>
+        <p class="thanks">&darr; thanks to these guys &darr;</p>
+        <img
+          class="brands"
+          src="assets/brands.jpg"
+          alt="BetaFPV, GEPRC, RadioMaster and getfpv.com logos"
+        />
+
+        <p class="disc">
+          links here to the BetaFPV website are affiliate links, earning me a commission
+          from purchases with no extra cost to you.
+        </p>
+
+        <p class="sub">
+          <a href="https://novafpv.carrd.co" target="_blank" rel="noopener">novafpv.carrd.co</a>
+          is moving here and will soon be retired.
+        </p>
+      </div>
+    </main>
+
+    <footer><a href="../">&larr; home</a> &nbsp;|&nbsp; site version 0.7</footer>
+  </body>
+</html>
