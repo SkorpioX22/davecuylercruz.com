@@ -133,7 +133,8 @@
         overflow: hidden;
       }
 
-      .gear a {
+      .gear a,
+      .rows a {
         display: flex;
         align-items: center;
         gap: 1rem;
@@ -144,12 +145,71 @@
         transition: background 0.2s ease;
       }
 
-      .gear a:last-child {
+      .gear a:last-child,
+      .rows a:last-child {
         border-bottom: none;
       }
 
       .gear a:hover {
         background: rgba(255, 255, 255, 0.06);
+      }
+
+      .drone {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .drone + .drone {
+        margin-top: 0.75rem;
+      }
+
+      .drone summary {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.85rem 1.1rem;
+        cursor: pointer;
+        list-style: none;
+        transition: background 0.2s ease;
+      }
+
+      .drone summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .drone summary:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .drone summary:focus-visible {
+        outline: 1px solid rgba(255, 255, 255, 0.5);
+        outline-offset: -1px;
+      }
+
+      .chev {
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 0.8rem;
+        transition: transform 0.2s ease;
+      }
+
+      details[open] .chev {
+        transform: rotate(90deg);
+      }
+
+      .d-name {
+        font-size: 0.95rem;
+        font-weight: 500;
+      }
+
+      .d-meta {
+        margin-left: auto;
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.35);
+      }
+
+      .rows {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       .g-name {
@@ -179,13 +239,15 @@
         transition: color 0.2s ease, transform 0.2s ease;
       }
 
-      .gear a:hover .g-arrow {
+      .gear a:hover .g-arrow,
+      .rows a:hover .g-arrow {
         color: #fff;
         transform: translate(2px, -2px);
       }
 
       @media (max-width: 560px) {
-        .gear a {
+        .gear a,
+        .rows a {
           flex-wrap: wrap;
           row-gap: 0.25rem;
         }
@@ -275,16 +337,75 @@
           </div>
         </div>
 
-        <p class="section-title">get my gear</p>
+        <p class="section-title">the drones</p>
+        <details class="drone">
+          <summary>
+            <span class="chev">&#9656;</span>
+            <span class="d-name">air65 ii racing</span>
+            <span class="d-meta">bnf &middot; 5 parts</span>
+          </summary>
+          <div class="rows">
+            <a href="https://betafpv.com/products/air65-ii-brushless-whoop-quadcopter?variant=43035791229062&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+              <span class="g-name">all in one bnf</span>
+              <span class="g-desc">betafpv &middot; air65 ii brushless whoop</span>
+              <span class="tag">affiliate</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+            <a href="https://betafpv.com/products/air65-ii-brushless-whoop-frame?variant=42083839017094&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+              <span class="g-name">frame</span>
+              <span class="g-desc">betafpv &middot; air65 ii brushless whoop frame</span>
+              <span class="tag">affiliate</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+            <a href="https://betafpv.com/collections/0702-motors/products/0702-brushless-motors-2026?variant=43034588610694&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+              <span class="g-name">motors</span>
+              <span class="g-desc">betafpv &middot; 0702 brushless motors (2026)</span>
+              <span class="tag">affiliate</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+            <a href="https://betafpv.com/products/matrix-1s-5in1-ii-brushless-flight-controller?_pos=2&_sid=272d3f887&_ss=r&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+              <span class="g-name">aio</span>
+              <span class="g-desc">betafpv &middot; matrix 1s 5in1 ii flight controller</span>
+              <span class="tag">affiliate</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+            <a href="https://hqprop.com/hq-ultralight-whoop-prop-12x09x331mm-2cw2ccw-pc-1mm-shaft-p0439.html" target="_blank" rel="noopener">
+              <span class="g-name">hqprop 1.2x0.9x3</span>
+              <span class="g-desc">hqprop &middot; ultralight whoop 31mm &middot; pc &middot; 1mm shaft</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+          </div>
+        </details>
+        <details class="drone">
+          <summary>
+            <span class="chev">&#9656;</span>
+            <span class="d-name">custom 85mm toothpick</span>
+            <span class="d-meta">3 parts</span>
+          </summary>
+          <div class="rows">
+            <a href="https://www.aliexpress.com/item/1005002352015396.html" target="_blank" rel="noopener">
+              <span class="g-name">twiglet 2 inch frame</span>
+              <span class="g-desc">aliexpress &middot; toothpick frame</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+            <a href="https://betafpv.com/products/1102-13500kv-brushless-motors?_pos=24&_sid=2bd195707&_ss=r&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+              <span class="g-name">1102 22000kv (2022)</span>
+              <span class="g-desc">betafpv &middot; 1102 brushless motors</span>
+              <span class="tag">affiliate</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+            <a href="https://hqprop.com/hq-ultralight-whoop-prop-18x12x345mm-2cw2ccw-poly-carbonate-p0410.html" target="_blank" rel="noopener">
+              <span class="g-name">hqprop 1.8x1.2x3</span>
+              <span class="g-desc">hqprop &middot; ultralight whoop 45mm &middot; pc &middot; 1.5mm shaft</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+          </div>
+        </details>
+
+        <p class="section-title">the kit</p>
         <div class="gear">
           <a href="https://betafpv.com/products/meteor75-pro-brushless-whoop-quadcopter?srsltid=AfmBOorcdrANrzinXl2WHl3QX8jiFcDTC2SwlMzVZOH6WVuSadCfzeSv&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
             <span class="g-name">meteor75 pro</span>
-            <span class="g-desc">betafpv &middot; brushless whoop quadcopter</span>
-            <span class="tag">affiliate</span>
-            <span class="g-arrow">&#8599;</span>
-          </a>
-          <a href="https://betafpv.com/products/air65-ii-brushless-whoop-quadcopter?srsltid=AYCX9vIGq1YO8hT1sl9OkrkuoLpAVUeh1cNyBK7x71jMkQ_evXUfezyM&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
-            <span class="g-name">air65 ii racing</span>
             <span class="g-desc">betafpv &middot; brushless whoop quadcopter</span>
             <span class="tag">affiliate</span>
             <span class="g-arrow">&#8599;</span>
