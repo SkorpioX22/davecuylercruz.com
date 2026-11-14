@@ -193,8 +193,18 @@
         transition: transform 0.2s ease;
       }
 
-      details[open] .chev {
+      .drone.open .chev {
         transform: rotate(90deg);
+      }
+
+      .caret {
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 0.8rem;
+        transition: transform 0.25s ease;
+      }
+
+      .drone.open .caret {
+        transform: rotate(-180deg);
       }
 
       .d-name {
@@ -343,6 +353,7 @@
             <span class="chev">&#9656;</span>
             <span class="d-name">air65 ii racing</span>
             <span class="d-meta">bnf &middot; 5 parts</span>
+            <span class="caret">&#9662;</span>
           </summary>
           <div class="rows">
             <a href="https://betafpv.com/products/air65-ii-brushless-whoop-quadcopter?variant=43035791229062&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
@@ -380,7 +391,8 @@
           <summary>
             <span class="chev">&#9656;</span>
             <span class="d-name">custom 85mm toothpick</span>
-            <span class="d-meta">3 parts</span>
+            <span class="d-meta">6 parts</span>
+            <span class="caret">&#9662;</span>
           </summary>
           <div class="rows">
             <a href="https://www.aliexpress.com/item/1005002352015396.html" target="_blank" rel="noopener">
@@ -399,17 +411,28 @@
               <span class="g-desc">hqprop &middot; ultralight whoop 45mm &middot; pc &middot; 1.5mm shaft</span>
               <span class="g-arrow">&#8599;</span>
             </a>
+            <a href="https://betafpv.com/products/matrix-1s-brushless-flight-controller?_pos=19&_sid=e5e6de231&_ss=r&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+              <span class="g-name">matrix 5 in 1 v1</span>
+              <span class="g-desc">betafpv &middot; matrix 1s brushless flight controller</span>
+              <span class="tag">affiliate</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+            <a href="https://betafpv.com/products/c03-fpv-micro-camera?_pos=1&_sid=ec0fd5941&_ss=r" target="_blank" rel="noopener">
+              <span class="g-name">c03 camera</span>
+              <span class="g-desc">betafpv &middot; c03 fpv micro camera</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
+            <a href="https://betafpv.com/products/canopy-for-micro-camera-2022?variant=39858772902022&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
+              <span class="g-name">meteor canopy</span>
+              <span class="g-desc">betafpv &middot; canopy for micro camera (2022)</span>
+              <span class="tag">affiliate</span>
+              <span class="g-arrow">&#8599;</span>
+            </a>
           </div>
         </details>
 
         <p class="section-title">the kit</p>
         <div class="gear">
-          <a href="https://betafpv.com/products/meteor75-pro-brushless-whoop-quadcopter?srsltid=AfmBOorcdrANrzinXl2WHl3QX8jiFcDTC2SwlMzVZOH6WVuSadCfzeSv&sca_ref=10599564.SNgOWgnY2Y&utm_source=socialmedia&utm_medium=socialmedia&utm_campaign=affiliate-dave-cuyler-cruz" target="_blank" rel="noopener">
-            <span class="g-name">meteor75 pro</span>
-            <span class="g-desc">betafpv &middot; brushless whoop quadcopter</span>
-            <span class="tag">affiliate</span>
-            <span class="g-arrow">&#8599;</span>
-          </a>
           <a href="https://www.skyzonefpv.com/collections/goggles/products/skyzone-cobra-x-v2-5-8ghz-48ch-steadyview-receiver-fpv-goggles-with-dvr" target="_blank" rel="noopener">
             <span class="g-name">goggles</span>
             <span class="g-desc">skyzone &middot; cobra x v2 &middot; 5.8ghz 48ch steadyview &middot; dvr</span>
@@ -441,5 +464,58 @@
     </main>
 
     <footer><a href="../">&larr; home</a> &nbsp;|&nbsp; site version 0.7</footer>
+    <script>
+      // Smooth <details> dropdowns — height + fade, desktop & mobile, honors reduced motion.
+      (() => {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const dur = 280;
+        const ease = "cubic-bezier(0.4, 0, 0.2, 1)";
+
+        document.querySelectorAll("details.drone").forEach((d) => {
+          const summary = d.querySelector("summary");
+          const content = d.querySelector(".rows");
+          if (!summary || !content) return;
+          let current = [];
+
+          const stop = () => {
+            current.forEach((a) => a.cancel());
+            current = [];
+          };
+
+          summary.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            if (reduce) {
+              d.open = !d.open;
+              d.classList.toggle("open", d.open);
+              return;
+            }
+
+            stop();
+            const isOpen = d.classList.contains("open");
+            const from = parseFloat(getComputedStyle(d).height);
+
+            if (!isOpen) {
+              d.open = true;
+              d.classList.add("open");
+              const to = summary.offsetHeight + content.offsetHeight;
+              current = [
+                d.animate([{ height: from + "px" }, { height: to + "px" }], { duration: dur, easing: ease }),
+                content.animate([{ opacity: 0 }, { opacity: 1 }], { duration: dur, easing: ease }),
+              ];
+            } else {
+              d.classList.remove("open");
+              const to = summary.offsetHeight;
+              const heightAnim = d.animate([{ height: from + "px" }, { height: to + "px" }], { duration: dur, easing: ease });
+              heightAnim.onfinish = () => { d.open = false; };
+              current = [
+                heightAnim,
+                content.animate([{ opacity: 1 }, { opacity: 0 }], { duration: dur, easing: ease }),
+              ];
+            }
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
